@@ -6,11 +6,10 @@
     <meta name="description" content="server controlador del aparato de musica"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <link rel="stylesheet" href="resources/waves/dist/waves.min.css" type="text/css" />
-    <link rel="stylesheet" href="resources/styles/material-design-icons.css" type="text/css" />
     <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="resources/styles/font.css" type="text/css" />
     <link rel="stylesheet" href="resources/styles/app.min.css" type="text/css" />
-
+    <link href="resources/animate/animate.min.css" rel="stylesheet" />
+    <link href="resources/waitme/waitMe.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="app">

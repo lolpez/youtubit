@@ -35,9 +35,18 @@ class VideoController {
                 'url' => $video_url,
                 'id' => $video_id
             );
-            echo json_encode($this->model->Obtener($this->model->Guardar($datos)));
+            echo json_encode(array(
+								'objeto' => $this->model->Obtener($this->model->Guardar($datos)),
+								'exito' => true,
+								'mensaje' => 'Video agregado a la playlist'
+								)
+							);
         }else{
-            echo json_encode('La url del video no es correcta');
+            echo json_encode(array(
+								'mensaje' => 'La url del video no es correcta',
+								'exito' => false
+								)
+							);
         }
     }
 
@@ -59,8 +68,12 @@ class VideoController {
     }
 
     function Youtubify($url) {
-        $json_output = file_get_contents("http://www.youtube.com/oembed?url=".$url."&format=json");
-        return json_decode($json_output, true);
+		$json_output = @file_get_contents("http://www.youtube.com/oembed?url=".$url."&format=json");
+		if ($json_output === FALSE){
+			return false;
+		}else{
+			return json_decode($json_output, true);
+		}
     }
 
 }

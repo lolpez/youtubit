@@ -35,7 +35,7 @@
                             <h2>Agregar un video a la lista</h2>
                             <small>Introduzca la url del video que desea de la pagina de YouTube</small>
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body" id="form-url">
                             <div class="form-horizontal">
                                 <div class="form-group">
                                     <div class="col-sm-12">
@@ -89,7 +89,7 @@
         });
     }
     function onPlayerReady(event) {
-//        event.target.playVideo();
+
     }
 
     var done = false;
@@ -101,23 +101,36 @@
     }
 
     function guardar(){
+		var loading = $('#form-url').waitMe({
+			effect: 'pulse',
+			text: 'Cargando...',
+			bg: 'rgba(255,255,255,0.90)',
+			color: '#555'
+		});
         $.ajax({
             method: "POST",
             url: 'index.php?web_service=guardar',
             data: {url : $('#url').val()},
-            async: false
+            async: true
         }).done(function (response) {
-            response = JSON.parse(response);
-            console.log(response);
-            if (response){
+			response = JSON.parse(response);
+			console.log(response);
+            if (response.exito){
+				objeto = response.objeto; 
                 $('#lista').append(
-                    "<a id='video-"+ response.pkvideo  +"' class='list-group-item' onclick='reproducir(" + response.pkvideo + ")'>" +
-                    "<span class='pull-left w-40 m-r'>" + response.pkvideo +  " </span>"+
-                    "<span class='block font-bold'>" + response.titulo + " </span>"+
-                    "<small class='text-muted'>" + response.id + " </small>"+
+                    "<a id='video-"+ objeto.pkvideo  +"' class='list-group-item' onclick='reproducir(" + objeto.pkvideo + ")'>" +
+                    "<span class='pull-left w-40 m-r'>" + objeto.pkvideo +  " </span>"+
+                    "<span class='block font-bold'>" + objeto.titulo + " </span>"+
+                    "<small class='text-muted'>" + objeto.id + " </small>"+
                     "</a>"
                 )
-            }
+				showMessage(response.mensaje,'success','ok');
+				$('#url').val('');
+				loading.waitMe('hide');
+            }else{
+				showMessage(response.mensaje,'danger','remove');
+				loading.waitMe('hide');
+			}
         })
     }
 
@@ -143,5 +156,37 @@
         })
     }
 
-
+	
+    function showMessage(mensaje,tipo,icono){
+		$.notify({
+			icon: 'glyphicon glyphicon-' + icono,
+			message: mensaje
+		},{
+			element: 'body',
+			position: null,
+			type: tipo,
+			allow_dismiss: true,
+			newest_on_top: false,
+			showProgressbar: false,
+			placement: {
+				from: "top",
+				align: "center"
+			},
+			offset: 20,
+			spacing: 10,
+			z_index: 1031,
+			delay: 5000,
+			timer: 1000,
+			mouse_over: null,
+			animate: {
+				enter: 'animated fadeInDown',
+				exit: 'animated fadeOutUp'
+			},
+			onShow: null,
+			onShown: null,
+			onClose: null,
+			onClosed: null,
+			icon_type: 'class'
+		});
+	}
 </script>
