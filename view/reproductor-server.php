@@ -36,10 +36,10 @@
             $.ajax({
                 method: "POST",
                 url: '../index.php?web_service=aleatorio',
-                data: {pkvideo : pk_video_actual},
+                data: '',//{pkvideo : pk_video_actual},
                 async: false
             }).done(function (response) {
-                response = JSON.parse(response);
+                //response = JSON.parse(response);
                 console.log(response);
                 if (response){
                     pk_video_actual = parseInt(response.pkvideo);
