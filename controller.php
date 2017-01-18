@@ -62,6 +62,10 @@ class VideoController {
         }
         $this->Reproducir($siguiente);
     }
+	
+	public function Aleatorio(){
+		$this->Reproducir($this->model->Aleatorio()->pkvideo);
+	}
 
     public function Actualizar(){
         echo json_encode($this->model->Obtener_Actual());

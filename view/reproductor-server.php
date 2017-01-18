@@ -35,7 +35,7 @@
         if(event.data === 0) {
             $.ajax({
                 method: "POST",
-                url: '../index.php?web_service=siguiente',
+                url: '../index.php?web_service=aleatorio',
                 data: {pkvideo : pk_video_actual},
                 async: false
             }).done(function (response) {

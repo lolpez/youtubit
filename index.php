@@ -19,6 +19,10 @@
                 $controller->Actualizar();
                 return;
                 break;
+			case 'aleatorio':
+                $controller->Aleatorio();
+                return;
+                break;
             default:
                 $controller->Index();
                 break;

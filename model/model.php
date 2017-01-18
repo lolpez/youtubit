@@ -23,6 +23,16 @@ class Video {
             die($e->getMessage());
         }
     }
+	
+	public function Aleatorio() {
+        try {
+            $stm = $this->pdo->prepare("SELECT pkvideo FROM video ORDER BY RAND() LIMIT 1");
+            $stm->execute();
+            return $stm->fetchAll(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 
     public function Obtener($pkvideo) {
         try {
