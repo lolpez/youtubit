@@ -38,7 +38,7 @@ class VideoController {
             echo json_encode(array(
 								'objeto' => $this->model->Obtener($this->model->Guardar($datos)),
 								'exito' => true,
-								'mensaje' => 'Video agregado a la playlist'
+								'mensaje' => $video_title + ' agregado a la playlist.'
 								)
 							);
         }else{
